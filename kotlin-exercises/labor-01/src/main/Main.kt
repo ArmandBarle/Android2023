@@ -2,6 +2,8 @@ package main
 
 import java.util.*
 import kotlin.random.Random
+import main.AnagramsGrouperTest
+import org.junit.Test
 
 fun isPrime(number: Int): Boolean {
     if (number <= 1) return false
@@ -14,6 +16,7 @@ fun isPrime(number: Int): Boolean {
 
     return true
 }
+
 
 fun main(args: Array<String>) {
     println("Exercise 1:")
@@ -147,6 +150,31 @@ fun main(args: Array<String>) {
     val average = sum.toDouble() / randomIntArray.size
     println("Average: $average")
 
+    //Extra
+    println("Extra:")
+    val list = listOf("eat", "tea", "tan", "ate", "nat", "bat").toTypedArray()
+    val groupedAnagrams = groupAnagrams(list)
+    println(groupedAnagrams)
+
+    println("Tests:")
+    AnagramsGrouperTest()
+}
+
+fun groupAnagrams(anagramList: Array<String>): List<List<String>> {
+    //make tuple pairs where 1 value is original and second is sorted
+    val anagramWithSortedLetters = anagramList.map {
+        Pair(it, it.lowercase(Locale.getDefault()).toCharArray().sorted().joinToString(""))
+    }
+//    println("$anagramList\n$anagramWithSortedLetters")
+
+    //check which elements are sorted the exactly same way
+    val groupedAnagrams = anagramWithSortedLetters.groupBy { it.second }
+    println(groupedAnagrams)
+
+    //create a list of the same anagrams
+
+
+    return groupedAnagrams.map { groupedAnagrams -> groupedAnagrams.value.map { it.first } }
 }
 
 fun printEvenNumbers(numbers: List<Int>) = numbers.filter { it % 2 == 0 }.forEach(::println)
