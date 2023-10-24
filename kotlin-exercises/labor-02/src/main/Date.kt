@@ -2,9 +2,11 @@ package main
 
 import java.time.LocalDate
 
-data class Date(val year: Int = LocalDate.now().year,
-                val month: Int = LocalDate.now().monthValue,
-                val day: Int = LocalDate.now().dayOfMonth) : Comparable<Date> {
+data class Date(
+    val year: Int = LocalDate.now().year,
+    val month: Int = LocalDate.now().monthValue,
+    val day: Int = LocalDate.now().dayOfMonth
+) : Comparable<Date> {
 
     override fun compareTo(other: Date): Int {
         return when {
@@ -28,7 +30,9 @@ data class Date(val year: Int = LocalDate.now().year,
 
         val maxDayOfMonth = LocalDate.of(year, month, 1).lengthOfMonth()
 
-        return year >= 1 && year <= LocalDate.now().year && month >= 1 && month <= 12 && day >= 1 && day <= maxDayOfMonth
+        return (year in 1 .. LocalDate.now().year)
+                && (month in 1..12)
+                && (day in 1 .. maxDayOfMonth)
     }
 
 }
