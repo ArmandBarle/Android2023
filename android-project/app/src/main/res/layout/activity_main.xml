@@ -6,13 +6,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
+
     <TextView
+            android:id="@+id/mainActivityTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Welcome to Lazy Bites"
+            app:layout_constraintBottom_toBottomOf="@id/mainActivityText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/mainActivityText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Where you can find quick and easy to make recepies"
+            app:layout_constraintBottom_toBottomOf="@id/button_main_activity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/mainActivityTitle"/>
+
+    <Button
+            android:text="Start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_main_activity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/mainActivityText" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
