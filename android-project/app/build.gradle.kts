@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.tasty.recipesapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.tasty.recipesapp"
@@ -20,7 +20,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -37,6 +40,18 @@ android {
 }
 
 dependencies {
+
+    // Navigation
+    val nav_version = "2.7.5"
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
+
+    // Bottom Navigation
+    implementation("com.google.android.material:material:1.11.0-alpha01")
+
+
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
