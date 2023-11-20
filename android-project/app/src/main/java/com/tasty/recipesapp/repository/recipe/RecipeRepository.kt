@@ -26,7 +26,6 @@ object RecipeRepository {
             Gson().fromJson(jsonString, object : TypeToken<RecipesDTO>() {}.type)
 
         return recipesResponse.results.toModelList()
-
     }
 
 }
