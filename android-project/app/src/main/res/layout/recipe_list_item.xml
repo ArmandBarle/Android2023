@@ -3,10 +3,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recipeItemImageView" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recipeItemTitleView" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recipeItemTitleView" />
 
 
     <TextView
