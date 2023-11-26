@@ -12,6 +12,7 @@ import java.io.IOException
 object RecipeRepository {
 
     private val TAG: String? = RecipeRepository::class.java.canonicalName
+    private var recipesList: List<RecipeModel> = emptyList()
 
     fun getRecipes(context: Context): List<RecipeModel> {
         lateinit var jsonString: String
@@ -25,8 +26,11 @@ object RecipeRepository {
         val recipesResponse: RecipesDTO =
             Gson().fromJson(jsonString, object : TypeToken<RecipesDTO>() {}.type)
 
-        return recipesResponse.results.toModelList()
+        recipesList = recipesResponse.results.toModelList()
+
+        return recipesList
     }
 
+    fun getRecipe(recipeId: Int): RecipeModel? = recipesList.find { it.id == recipeId }
 }
 

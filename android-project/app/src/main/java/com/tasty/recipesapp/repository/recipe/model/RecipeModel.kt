@@ -1,9 +1,11 @@
 package com.tasty.recipesapp.repository.recipe.model
 
 data class RecipeModel(
+    val id: Int,
     val name: String,
     val description: String?,
-    val thumbnail_url: String?,
-    val instructions: List<InstructionModel>
-//    val user_ratings: String?,
+    val thumbnailUrl: String?,
+    val userRatings: UserRatingsModel,
+    val totalTime: TotalTimeModel,
+    val instructions: List<InstructionModel>,
 )

@@ -5,17 +5,20 @@ data class RecipeDTO(
     val name: String,
     val description: String? = "",
     val thumbnail_url: String?,
-    val instructions: List<InstructionDTO>
-//    val user_ratings: String?,
+    val user_ratings: UserRatingsDTO,
+    val total_time_tier: TotalTimeTierDTO,
+    val instructions: List<InstructionDTO>,
 )
 
 
 fun RecipeDTO.toModel() = RecipeModel(
+    id = this.id,
     name = this.name,
     description = this.description,
-    thumbnail_url = this.thumbnail_url,
+    thumbnailUrl = this.thumbnail_url,
+    userRatings = this.user_ratings.toModel(),
+    totalTime = this.total_time_tier.toModel(),
     instructions = this.instructions.toModelList()
-//    user_ratings = this.user_ratings
 )
 
 fun List<RecipeDTO>.toModelList(): List<RecipeModel> {
