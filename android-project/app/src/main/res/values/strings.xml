@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">RecipesApp</string>
-    <string name="splash_screen">Testing...</string>
+    <string name="splash_screen">Testing…</string>
+    <string name="user_ratings_label">Rating:</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

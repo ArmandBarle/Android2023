@@ -1,6 +1,7 @@
 package com.tasty.recipesapp.ui.recipe.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,19 +13,16 @@ import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 
 class RecipeListAdapter(
     private var recipesList: List<RecipeModel>,
-    private val context: Context
+    private val context: Context,
+    private val onItemClickListener: (RecipeModel) -> Unit,
 ) : RecyclerView.Adapter<RecipeListAdapter.RecipeItemViewHolder>() {
 
-    inner class RecipeItemViewHolder(binding: RecipeListItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        val recipeTitleView: TextView = binding.recipeItemTitleView
-        val recipeDescriptionView: TextView = binding.recipeItemDescriptionView
-        val recipeImageView: ImageView = binding.recipeItemImageView
-        //
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeItemViewHolder {
-        TODO("Not yet implemented")
+        val binding = RecipeListItemBinding.inflate(
+            LayoutInflater.from(context), parent, false
+        )
+        return RecipeItemViewHolder(binding)
     }
 
     override fun getItemCount(): Int = recipesList.size
@@ -35,16 +33,39 @@ class RecipeListAdapter(
         holder.recipeTitleView.text = currentRecipe.name
         holder.recipeDescriptionView.text = currentRecipe.description
 
+
         Glide.with(context)
-            .load(currentRecipe.thumbnail_url)
+            .load(currentRecipe.thumbnailUrl)
             .centerCrop()
             .placeholder(R.drawable.ic_launcher_background)
             .fallback(R.drawable.ic_launcher_background)
             .into(holder.recipeImageView)
+
+        val ratingsLabel = "Rating:"
+        holder.recipeRatingView.text = ratingsLabel
+            .plus(" ").plus(currentRecipe.userRatings.score)
     }
 
     fun setData(newList: List<RecipeModel>) {
         recipesList = newList
+    }
+
+    inner class RecipeItemViewHolder(binding: RecipeListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        val recipeTitleView: TextView = binding.recipeItemTitleView
+        val recipeDescriptionView: TextView = binding.recipeItemDescriptionView
+        val recipeImageView: ImageView = binding.recipeItemImageView
+        val recipeRatingView: TextView = binding.recipeItemRatingView
+
+        init {
+            binding.root.setOnClickListener {
+                val currentPosition = this.adapterPosition
+                val currentRecipe = recipesList[currentPosition]
+
+                onItemClickListener(currentRecipe)
+            }
+        }
     }
 }
 

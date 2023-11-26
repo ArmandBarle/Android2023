@@ -19,4 +19,9 @@
             android:layout_height="match_parent"
             android:id="@+id/recipeItemDescriptionView" />
 
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recipeItemRatingView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

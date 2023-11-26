@@ -7,12 +7,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.FragmentRecipesBinding
 import com.tasty.recipesapp.repository.recipe.RecipeRepository
+import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 import com.tasty.recipesapp.ui.recipe.adapter.RecipeListAdapter
 import com.tasty.recipesapp.ui.recipe.viewmodel.RecipeListViewModel
 
@@ -47,23 +50,13 @@ class RecipesFragment : Fragment() {
         }
 
         viewModel.recipesList.observe(viewLifecycleOwner) { recipes ->
-//            for (recipe in recipes) {
-//                Log.d(TAG, "Recipe Name: ${recipe.name}")
-//                Log.d(TAG, "Recipe Description: ${recipe.description}")
-//                Log.d(TAG, "Recipe thumbnail: ${recipe.thumbnail_url}")
-////                Log.d(TAG, "Recipe thumbnail: ${recipe.user_ratings}")
-//                Log.d(TAG, "Recipe instructions:")
-//                for (instruciton in recipe.instructions) {
-//                    Log.d(TAG, "display text: ${instruciton.displayText}")
-//                }
-//                Log.d(TAG, "------------------------------------------------")
-//            }
-
+            recipesAdapter.setData(recipes)
+            recipesAdapter.notifyItemRangeChanged(0, recipes.lastIndex)
         }
     }
 
     private fun initRecyclerView() {
-        recipesAdapter = RecipeListAdapter(ArrayList(),requireContext(),
+        recipesAdapter = RecipeListAdapter(ArrayList(), requireContext(),
             onItemClickListener =
             { recipe ->
                 navigateToRecipeDetails(recipe)
@@ -74,6 +67,17 @@ class RecipesFragment : Fragment() {
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(
                 activity,
-                DividerItemDecoration.VERTICAL))
+                DividerItemDecoration.VERTICAL
+            )
+        )
+    }
+
+    private fun navigateToRecipeDetails(recipe: RecipeModel) {
+        findNavController().navigate(
+            R.id.action_recipesFragment_to_recipeDetailFragment,
+            bundleOf(
+                BUNDLE_EXTRA_SELECTED_RECIPE_ID to recipe.id
+            )
+        )
     }
 }
