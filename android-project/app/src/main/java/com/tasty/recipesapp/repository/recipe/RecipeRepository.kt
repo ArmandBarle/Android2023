@@ -5,8 +5,8 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
-import com.tasty.recipesapp.repository.recipe.model.RecipesDTO
-import com.tasty.recipesapp.repository.recipe.model.toModelList
+import com.tasty.recipesapp.repository.recipe.dto.RecipesDTO
+import com.tasty.recipesapp.repository.recipe.dto.toModelList
 import java.io.IOException
 
 object RecipeRepository {

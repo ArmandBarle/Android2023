@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.FragmentRecipeDetailBinding
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
@@ -46,18 +47,20 @@ class RecipeDetailFragment : Fragment() {
         binding.recipeTitleView.text = recipeModel.name
         binding.recipeDescriptionView.text = recipeModel.description
 
-//        Glide.with(context)
-//            .load(currentRecipe.thumbnailUrl)
-//            .centerCrop()
-//            .placeholder(R.drawable.ic_launcher_background)
-//            .fallback(R.drawable.ic_launcher_background)
-//            .into(binding.recipeImageView)
+        context?.let {
+            Glide.with(it)
+                .load(recipeModel.thumbnailUrl)
+                .centerCrop()
+                .placeholder(R.drawable.ic_launcher_background)
+                .fallback(R.drawable.ic_launcher_background)
+                .into(binding.recipeImageView)
+        }
 
         val ratingsLabel = requireActivity().getString(R.string.user_ratings_label)
 
         binding.recipeRatingsView.text = ratingsLabel.plus(" ").plus(recipeModel.userRatings.score)
 
-        binding.recipetotalTimeView.text = recipeModel.totalTime.displayTier
+        binding.recipeTotalTimeView.text = recipeModel.totalTime.displayTier
 
         val instructionsString = recipeModel.instructions.joinToString("\n") {
             it.position.toString().plus(". ").plus(it.displayText)

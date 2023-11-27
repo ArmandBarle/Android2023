@@ -1,4 +1,6 @@
-package com.tasty.recipesapp.repository.recipe.model
+package com.tasty.recipesapp.repository.recipe.dto
+
+import com.tasty.recipesapp.repository.recipe.model.TotalTimeModel
 
 data class TotalTimeTierDTO(
 
