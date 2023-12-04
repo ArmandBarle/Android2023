@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.FragmentRecipesBinding
 import com.tasty.recipesapp.repository.recipe.RecipeRepository
@@ -36,6 +37,10 @@ class RecipesFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentRecipesBinding.inflate(inflater, container, false)
         initRecyclerView()
+
+        binding.newRecipeButton.setOnClickListener {
+            findNavController().navigate(R.id.action_recipesFragment_to_newRecipeFragment)
+        }
 
         return binding.root
     }
