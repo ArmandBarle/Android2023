@@ -16,6 +16,7 @@ class RecipeListAdapter(
     private var recipesList: List<RecipeModel>,
     private val context: Context,
     private val onItemClickListener: (RecipeModel) -> Unit,
+    private val onItemLongClickListener: (RecipeModel) -> Unit = {},
 ) : RecyclerView.Adapter<RecipeListAdapter.RecipeItemViewHolder>() {
 
 
@@ -66,6 +67,13 @@ class RecipeListAdapter(
                 val currentRecipe = recipesList[currentPosition]
 
                 onItemClickListener(currentRecipe)
+            }
+
+            binding.root.setOnLongClickListener {
+                val currentPosition = this.adapterPosition
+                val currentRecipe = recipesList[currentPosition]
+                onItemLongClickListener(currentRecipe)
+                true
             }
         }
     }

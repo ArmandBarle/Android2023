@@ -38,9 +38,6 @@ class RecipesFragment : Fragment() {
         binding = FragmentRecipesBinding.inflate(inflater, container, false)
         initRecyclerView()
 
-        binding.newRecipeButton.setOnClickListener {
-            findNavController().navigate(R.id.action_recipesFragment_to_newRecipeFragment)
-        }
 
         return binding.root
     }
