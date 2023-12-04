@@ -14,4 +14,4 @@ fun TotalTimeTierDTO.toModel() = TotalTimeModel(
     displayTier = displayTier
 )
 
-fun List<TotalTimeTierDTO>.toModelList() = map { it.toModel() }
+fun List<TotalTimeTierDTO>.toModelList() = this.map { it.toModel() }

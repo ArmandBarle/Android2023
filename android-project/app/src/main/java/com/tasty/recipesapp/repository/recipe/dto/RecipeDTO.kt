@@ -9,7 +9,7 @@ data class RecipeDTO(
     val thumbnail_url: String?,
     val user_ratings: UserRatingsDTO,
     val total_time_tier: TotalTimeTierDTO,
-    val instructions: List<InstructionDTO>,
+    val instructions: List<InstructionsDTO>,
 )
 
 

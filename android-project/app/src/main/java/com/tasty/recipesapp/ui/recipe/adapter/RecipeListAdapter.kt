@@ -1,6 +1,7 @@
 package com.tasty.recipesapp.ui.recipe.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -34,6 +35,7 @@ class RecipeListAdapter(
         holder.recipeDescriptionView.text = currentRecipe.description
 
 
+        Log.d("TAG", "onBindViewHolder: ${currentRecipe.thumbnailUrl}")
         Glide.with(context)
             .load(currentRecipe.thumbnailUrl)
             .centerCrop()

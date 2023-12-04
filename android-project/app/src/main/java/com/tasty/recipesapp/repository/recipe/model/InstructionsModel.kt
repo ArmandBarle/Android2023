@@ -1,6 +1,6 @@
 package com.tasty.recipesapp.repository.recipe.model
 
-data class InstructionModel(
+data class InstructionsModel(
 //    val appliance: String?,
 //    val endTime: Int?,
 //    val temperature: String?,

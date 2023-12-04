@@ -7,5 +7,5 @@ data class RecipeModel(
     val thumbnailUrl: String?,
     val userRatings: UserRatingsModel,
     val totalTime: TotalTimeModel,
-    val instructions: List<InstructionModel>,
+    val instructions: List<InstructionsModel>,
 )
