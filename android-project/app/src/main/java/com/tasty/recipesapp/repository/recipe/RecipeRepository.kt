@@ -32,5 +32,15 @@ object RecipeRepository {
     }
 
     fun getRecipe(recipeId: Int): RecipeModel? = recipesList.find { it.id == recipeId }
+
+//    fun insertRecipe(recipe: RecipeModel): Boolean {
+//        return myRecipeList.add(recipe)
+//    }
+//
+//    fun deleteRecipe(recipe: RecipeModel): Boolean {
+//        return myRecipeList.remove(recipe)
+//    }
+//
+//    fun getMyRecipes(context: Context)= myRecipeList
 }
 
