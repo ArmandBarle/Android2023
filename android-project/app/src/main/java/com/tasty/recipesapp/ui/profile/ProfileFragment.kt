@@ -15,7 +15,10 @@ import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.FragmentProfileBinding
 import com.tasty.recipesapp.databinding.FragmentRecipesBinding
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
+import com.tasty.recipesapp.ui.App
+//import com.tasty.recipesapp.ui.App
 import com.tasty.recipesapp.ui.profile.viewmodel.ProfileViewModel
+import com.tasty.recipesapp.ui.profile.viewmodel.factory.ProfileViewModelFactory
 import com.tasty.recipesapp.ui.recipe.RecipesFragment
 import com.tasty.recipesapp.ui.recipe.adapter.RecipeListAdapter
 import com.tasty.recipesapp.ui.recipe.viewmodel.RecipeListViewModel
@@ -36,6 +39,7 @@ class ProfileFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+
         initRecyclerView()
 
         binding.newRecipeButton.setOnClickListener {

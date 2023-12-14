@@ -17,6 +17,7 @@ import org.json.JSONObject
 import java.io.IOException
 
 class RecipeRepository(private val recipeDao: RecipeDao) {
+//object RecipeRepository {
 
     private val TAG: String? = RecipeRepository::class.java.canonicalName
     private var recipesList: List<RecipeModel> = emptyList()
@@ -39,7 +40,7 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
         return recipesList
     }
 
-    fun getRecipe(recipeId: String): RecipeModel? = recipesList.find { it.id == recipeId }
+    fun getRecipe(recipeId: Int): RecipeModel? = recipesList.find { it.id == recipeId }
 
     // List
     fun insertRecipe(recipe: RecipeModel): Boolean {
@@ -54,27 +55,30 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
 
 
     // Database
+    // Todo why boolean
 
     suspend fun insertRecipe(recipe: RecipeEntity): Boolean {
         val result = recipeDao.insertRecipe(recipe)
         Log.d("xyz", "insertRecipe: $result")
 
-        return result > 0
+//        return result > 0
+        return true
     }
 
     suspend fun deleteRecipe(recipe: RecipeEntity): Boolean {
         val result = recipeDao.deleteRecipe(recipe)
         Log.d("xyz", "deleteRecipe: $result")
-        return result > 0
+//        return result > 0
+        return true
     }
 
     suspend fun getAllRecipes(): List<RecipeModel> {
         return recipeDao.getAllRecipes().map {
             val jsonObject = JSONObject(it.json)
             jsonObject.apply { put("id", it.internalId) }
-            Gson().fromJson(jsonObject.toString(), RecipeDTO::class.java).toModel())
+            Gson().fromJson(jsonObject.toString(), RecipeDTO::class.java).toModel()
         }
     }
 }
-}
+
 

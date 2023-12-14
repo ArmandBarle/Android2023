@@ -1,51 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.recipe.NewRecipeFragment">
 
-    <TextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/newRecipeTitleView"
+            android:id="@+id/newRecipeVideoUrlView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/newRecipeNameView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/newRecipeTitleView"
-            android:autofillHints="Name"
-            android:inputType="text" />
+            app:layout_constraintTop_toBottomOf="@id/newRecipeImageUrlView"
+            android:autofillHints="VideoUrl"
+            android:inputType="textUri" />
 
     <!--    <EditText-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/newRecipeVideoUrlView"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@id/newRecipeImageUrlView"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/newRecipeIngredientsView"-->
-<!--            android:autofillHints="VideoUrl"-->
-<!--            android:inputType="textUri" />-->
-
-<!--    <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/newRecipeIngredientsView"-->
-<!--            android:text="@string/ingredients"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@id/newRecipeVideoUrlView"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/newRecipeIngredient1View" />-->
-
-<!--    <EditText-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
 <!--            android:id="@+id/newRecipeIngredient1View"-->
@@ -122,15 +94,44 @@
 <!--            android:autofillHints="Instruction 3"-->
 <!--            android:inputType="text" />-->
 
+<!--    <EditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/newRecipeIngredientsView"-->
+<!--            android:text="@string/ingredients"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/newRecipeVideoUrlView" />-->
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/newRecipeTitleView"
+            android:text="@string/enter_a_new_recipe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.0" />
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/newRecipeNameView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/newRecipeTitleView"
+            android:autofillHints="Name"
+            android:inputType="text" />
+
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/newRecipeDescriptionView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/newRecipeTitleView"
+            app:layout_constraintTop_toBottomOf="@id/newRecipeNameView"
             android:autofillHints="Description"
-            android:inputType="text"/>
+            android:inputType="text" />
 
     <EditText
             android:layout_width="match_parent"
@@ -140,7 +141,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/newRecipeDescriptionView"
             android:autofillHints="ImageUrl"
-            android:inputType="textUri"/>
+            android:inputType="textUri" />
 
     <Button
             android:layout_width="wrap_content"

@@ -44,9 +44,9 @@ class RecipeListAdapter(
             .fallback(R.drawable.ic_launcher_background)
             .into(holder.recipeImageView)
 
-        val ratingsLabel = "Rating:"
-        holder.recipeRatingView.text = ratingsLabel
-            .plus(" ").plus(currentRecipe.userRatings.score)
+//        val ratingsLabel = "Rating:"
+//        holder.recipeRatingView.text = ratingsLabel
+//            .plus(" ").plus(currentRecipe.userRatings.score)
     }
 
     fun setData(newList: List<RecipeModel>) {

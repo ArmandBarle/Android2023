@@ -17,8 +17,12 @@ import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.FragmentRecipesBinding
 import com.tasty.recipesapp.repository.recipe.RecipeRepository
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
+import com.tasty.recipesapp.ui.App
+import com.tasty.recipesapp.ui.profile.viewmodel.ProfileViewModel
+import com.tasty.recipesapp.ui.profile.viewmodel.factory.ProfileViewModelFactory
 import com.tasty.recipesapp.ui.recipe.adapter.RecipeListAdapter
 import com.tasty.recipesapp.ui.recipe.viewmodel.RecipeListViewModel
+import com.tasty.recipesapp.ui.recipe.viewmodel.factory.RecipeViewModelFactory
 
 
 class RecipesFragment : Fragment() {
@@ -30,6 +34,8 @@ class RecipesFragment : Fragment() {
 
     private lateinit var binding: FragmentRecipesBinding
     private lateinit var recipesAdapter: RecipeListAdapter
+    private lateinit var viewModel: RecipeListViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,7 +51,13 @@ class RecipesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel = ViewModelProvider(this).get(RecipeListViewModel::class.java)
+        Log.d(TAG, "onViewCreated: ")
+//        val viewModel = ViewModelProvider(this).get(RecipeListViewModel::class.java)
+
+        val factory = RecipeViewModelFactory((activity?.application as App).repository)
+        viewModel = ViewModelProvider(this, factory)[RecipeListViewModel::class.java]
+
+        Log.d(TAG, "viewModel")
 
         context?.let {
             viewModel.fetchRecipesData(it)

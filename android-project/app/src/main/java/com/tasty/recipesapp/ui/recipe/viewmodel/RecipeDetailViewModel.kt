@@ -2,11 +2,14 @@ package com.tasty.recipesapp.ui.recipe.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.tasty.recipesapp.repository.RecipeDatabase
+import com.tasty.recipesapp.repository.recipe.RecipeDao
 import com.tasty.recipesapp.repository.recipe.RecipeRepository
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
+import com.tasty.recipesapp.ui.App
 
-class RecipeDetailViewModel : ViewModel() {
-    private val repository = RecipeRepository
+class RecipeDetailViewModel(var repository: RecipeRepository) : ViewModel() {
+
 
     var recipe: MutableLiveData<RecipeModel> = MutableLiveData()
 

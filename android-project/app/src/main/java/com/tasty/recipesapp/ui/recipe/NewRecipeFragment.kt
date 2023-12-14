@@ -1,6 +1,8 @@
 package com.tasty.recipesapp.ui.recipe
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +10,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 import com.tasty.recipesapp.databinding.FragmentNewRecipeBinding
+import com.tasty.recipesapp.repository.recipe.model.RecipeEntity
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 import com.tasty.recipesapp.ui.App
+//import com.tasty.recipesapp.ui.App
 import com.tasty.recipesapp.ui.profile.viewmodel.ProfileViewModel
 import com.tasty.recipesapp.ui.profile.viewmodel.factory.ProfileViewModelFactory
+import com.tasty.recipesapp.ui.recipe.viewmodel.RecipeListViewModel
+import kotlin.math.log
 
 class NewRecipeFragment : Fragment() {
 
@@ -33,22 +40,26 @@ class NewRecipeFragment : Fragment() {
         val factory = ProfileViewModelFactory((activity?.application as App).repository)
         val viewModel = ViewModelProvider(this, factory)[ProfileViewModel::class.java]
 
+
         binding.newRecipeSaveButton.setOnClickListener {
             val recipeModel = RecipeModel(
+                1,
                 binding.newRecipeNameView.text.toString(),
-                binding.newRecipeDescription.text.toString(),
-                binding.newRecipeThumbnailUrl.text.toString(),
-                binding.newRecipeVideoUrl.text.toString(),
-                binding.newRecipeRatings.text.toString(),
-                binding.newRecipeTotalTime.text.toString(),
-                binding.newRecipeIngredients.text.toString(),
+                binding.newRecipeDescriptionView.text.toString(),
+                binding.newRecipeImageUrlView.text.toString(),
+//                binding.newRecipeVideoUrlView.text.toString(),
+//                binding.newRecipeRatings.text.toString(),
+//                binding.newRecipeTotalTime.text.toString(),
+//                binding.newRecipeIngredientsView.text.toString(),
             )
 
-//            val gson = Gson()
-//            val jsonString = gson.toJson(recipeModel)
-//            val recipeEntity = RecipeEntity(json = jsonString)
+            val gson = Gson()
+            val jsonString = gson.toJson(recipeModel)
+            val recipeEntity = RecipeEntity(json = jsonString)
 
-            viewModel.insertRecipe(recipeModel)
+            Log.d(TAG, "recipeEntity: $recipeEntity")
+            viewModel.insertRecipe(recipeEntity)
+//            viewModel.insertRecipe(recipeModel)
         }
 
         viewModel.insertResult.observe(viewLifecycleOwner) {
