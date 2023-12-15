@@ -10,7 +10,7 @@ data class TotalTimeTierDTO(
 )
 
 fun TotalTimeTierDTO.toModel() = TotalTimeModel(
-    tier = this.tier,
+    tier = tier,
     displayTier = displayTier
 )
 

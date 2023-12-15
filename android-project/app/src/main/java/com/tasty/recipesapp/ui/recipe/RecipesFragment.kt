@@ -59,9 +59,13 @@ class RecipesFragment : Fragment() {
 
         Log.d(TAG, "viewModel")
 
-        context?.let {
-            viewModel.fetchRecipesData(it)
-        }
+        //Json
+//        context?.let {
+//            viewModel.fetchRecipesData(it)
+//        }
+
+        //API
+        viewModel.getAllRecipesFromApi()
 
         viewModel.recipesList.observe(viewLifecycleOwner) { recipes ->
             recipesAdapter.setData(recipes)
