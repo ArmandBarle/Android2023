@@ -36,9 +36,8 @@ class RecipeDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val recipeId = arguments?.getInt(RecipesFragment.BUNDLE_EXTRA_SELECTED_RECIPE_ID)
 
-        Log.d(TAG, "show details of recipe with id: $recipeId")
+        Log.d(TAG, "first show details of recipe with id: $recipeId")
 
-//        val viewModel = ViewModelProvider(this)[RecipeDetailViewModel::class.java]
 
         val factory = RecipeDetailViewModelFactory((activity?.application as App).repository)
         viewModel = ViewModelProvider(this, factory)[RecipeDetailViewModel::class.java]
@@ -46,7 +45,7 @@ class RecipeDetailFragment : Fragment() {
         recipeId?.let { viewModel.fetchRecipeData(it) }
 
         viewModel.recipe.observe(viewLifecycleOwner) {
-            Log.d(TAG, "show details of recipe with id: $it")
+            Log.d(TAG, "second show details of recipe with id: $it")
             updateViews(it)
         }
     }

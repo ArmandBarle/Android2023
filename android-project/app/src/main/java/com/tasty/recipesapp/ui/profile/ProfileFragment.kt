@@ -96,7 +96,7 @@ class ProfileFragment : Fragment() {
 
     private fun navigateToRecipeDetails(recipe: RecipeModel) {
         findNavController().navigate(
-            R.id.action_recipesFragment_to_recipeDetailFragment,
+            R.id.action_profileFragment_to_recipeDetailFragment,
             bundleOf(
                 BUNDLE_EXTRA_SELECTED_RECIPE_ID to recipe.id
             )

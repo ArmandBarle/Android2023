@@ -53,17 +53,19 @@ class NewRecipeFragment : Fragment() {
 //                binding.newRecipeIngredientsView.text.toString(),
             )
 
-            val gson = Gson()
-            val jsonString = gson.toJson(recipeModel)
-            val recipeEntity = RecipeEntity(json = jsonString)
-
-            Log.d(TAG, "recipeEntity: $recipeEntity")
-            viewModel.insertRecipe(recipeEntity)
-//            viewModel.insertRecipe(recipeModel)
+//            val gson = Gson()
+//            val jsonString = gson.toJson(recipeModel)
+//            val recipeEntity = RecipeEntity(json = jsonString)
+//
+//
+//            Log.d(TAG, "Recipe: $recipeEntity")
+//            viewModel.insertRecipe(recipeEntity)
+            viewModel.insertRecipe(recipeModel)
         }
 
         viewModel.insertResult.observe(viewLifecycleOwner) {
             if (it) {
+                Toast.makeText(context, "Recipe inserted", Toast.LENGTH_SHORT).show()
                 navigateBack()
             } else {
                 Toast.makeText(context, "Recipe was not inserted", Toast.LENGTH_SHORT).show()

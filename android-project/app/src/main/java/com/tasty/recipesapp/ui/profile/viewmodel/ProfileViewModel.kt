@@ -1,5 +1,6 @@
 package com.tasty.recipesapp.ui.profile.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -28,6 +29,7 @@ class ProfileViewModel(private val repository: RecipeRepository) : ViewModel() {
         viewModelScope.launch {
             val result = repository.insertRecipe(recipe)
             insertResult.value = result
+            Log.d("xyz", "List new size: ${myRecipesList.value?.size}")
         }
     }
 
@@ -39,21 +41,32 @@ class ProfileViewModel(private val repository: RecipeRepository) : ViewModel() {
 
     // Database
 
+    //    fun insertRecipe(recipe: RecipeEntity) {
+//        viewModelScope.launch {
+//            val isSuccessful = withContext(Dispatchers.IO) {
+//                repository.insertRecipe(recipe)
+//            }
+//            insertResult.value = isSuccessful
+//        }
+//    }
     fun insertRecipe(recipe: RecipeEntity) {
         viewModelScope.launch {
-            val isSuccessful = withContext(Dispatchers.IO) {
-                repository.insertRecipe(recipe)
-            }
-            insertResult.value = isSuccessful
+            repository.insertRecipe(recipe)
         }
     }
 
+//    fun deleteRecipe(recipe: RecipeEntity) {
+//        viewModelScope.launch {
+//            val isSuccessful = withContext(Dispatchers.IO) {
+//                repository.deleteRecipe(recipe)
+//            }
+//            deleteResult.value = isSuccessful
+//        }
+//    }
+
     fun deleteRecipe(recipe: RecipeEntity) {
         viewModelScope.launch {
-            val isSuccessful = withContext(Dispatchers.IO) {
-                repository.deleteRecipe(recipe)
-            }
-            deleteResult.value = isSuccessful
+            repository.deleteRecipe(recipe)
         }
     }
 
