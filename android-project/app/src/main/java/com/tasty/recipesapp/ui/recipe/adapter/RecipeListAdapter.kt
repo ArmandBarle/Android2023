@@ -16,6 +16,7 @@ class RecipeListAdapter(
     private var recipesList: List<RecipeModel>,
     private val context: Context,
     private val onItemClickListener: (RecipeModel) -> Unit,
+    private val onItemLongClickListener: (RecipeModel) -> Unit = {},
 ) : RecyclerView.Adapter<RecipeListAdapter.RecipeItemViewHolder>() {
 
 
@@ -43,9 +44,9 @@ class RecipeListAdapter(
             .fallback(R.drawable.ic_launcher_background)
             .into(holder.recipeImageView)
 
-        val ratingsLabel = "Rating:"
-        holder.recipeRatingView.text = ratingsLabel
-            .plus(" ").plus(currentRecipe.userRatings.score)
+//        val ratingsLabel = "Rating:"
+//        holder.recipeRatingView.text = ratingsLabel
+//            .plus(" ").plus(currentRecipe.userRatings.score)
     }
 
     fun setData(newList: List<RecipeModel>) {
@@ -66,6 +67,13 @@ class RecipeListAdapter(
                 val currentRecipe = recipesList[currentPosition]
 
                 onItemClickListener(currentRecipe)
+            }
+
+            binding.root.setOnLongClickListener {
+                val currentPosition = this.adapterPosition
+                val currentRecipe = recipesList[currentPosition]
+                onItemLongClickListener(currentRecipe)
+                true
             }
         }
     }

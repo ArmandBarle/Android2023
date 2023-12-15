@@ -7,4 +7,9 @@
     <string name="home">Home</string>
     <string name="recipes">Recipes</string>
     <string name="profile">Profile</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions:</string>
+    <string name="save">Save</string>
+    <string name="new_recipe">New Recipe</string>
+    <string name="enter_a_new_recipe">Enter a new recipe</string>
 </resources>

@@ -12,12 +12,17 @@ import com.bumptech.glide.Glide
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.FragmentRecipeDetailBinding
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
+import com.tasty.recipesapp.ui.App
 import com.tasty.recipesapp.ui.recipe.viewmodel.RecipeDetailViewModel
+import com.tasty.recipesapp.ui.recipe.viewmodel.RecipeListViewModel
+import com.tasty.recipesapp.ui.recipe.viewmodel.factory.RecipeDetailViewModelFactory
+import com.tasty.recipesapp.ui.recipe.viewmodel.factory.RecipeViewModelFactory
 
 
 class RecipeDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentRecipeDetailBinding
+    private lateinit var viewModel: RecipeDetailViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -31,14 +36,16 @@ class RecipeDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val recipeId = arguments?.getInt(RecipesFragment.BUNDLE_EXTRA_SELECTED_RECIPE_ID)
 
-        Log.d(TAG, "show details of recipe with id: $recipeId")
+        Log.d(TAG, "first show details of recipe with id: $recipeId")
 
-        val viewModel = ViewModelProvider(this)[RecipeDetailViewModel::class.java]
+
+        val factory = RecipeDetailViewModelFactory((activity?.application as App).repository)
+        viewModel = ViewModelProvider(this, factory)[RecipeDetailViewModel::class.java]
 
         recipeId?.let { viewModel.fetchRecipeData(it) }
 
         viewModel.recipe.observe(viewLifecycleOwner) {
-            Log.d(TAG, "show details of recipe with id: $it")
+            Log.d(TAG, "second show details of recipe with id: $it")
             updateViews(it)
         }
     }
