@@ -22,11 +22,16 @@
             android:id="@+id/homeTitleView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/featured_recipes_of_the_day" />
+            android:text="@string/featured_recipes_of_the_day"
+            android:textSize="32sp"
+            android:textAlignment="center"
+            android:paddingTop="10dp"
+            android:textColor="#ea9a15"
+            android:fontFamily="sans-serif-medium"/>
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="500dp"
             android:id="@+id/featureRecipesRecycleView"
             app:layout_constraintTop_toBottomOf="@+id/imageViewSplashLogo" />
 

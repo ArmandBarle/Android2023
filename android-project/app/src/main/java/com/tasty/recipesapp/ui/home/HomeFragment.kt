@@ -1,7 +1,6 @@
 package com.tasty.recipesapp.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,9 +17,7 @@ import com.tasty.recipesapp.ui.App
 import com.tasty.recipesapp.ui.recipe.RecipesFragment
 import com.tasty.recipesapp.ui.recipe.adapter.RecipeListAdapter
 import com.tasty.recipesapp.ui.recipe.viewmodel.FeaturedRecipesViewModel
-import com.tasty.recipesapp.ui.recipe.viewmodel.RecipeListViewModel
 import com.tasty.recipesapp.ui.recipe.viewmodel.factory.FeaturedRecipesViewModelFactory
-import com.tasty.recipesapp.ui.recipe.viewmodel.factory.RecipeViewModelFactory
 
 
 class HomeFragment : Fragment() {

@@ -1,12 +1,15 @@
 package com.tasty.recipesapp.ui.recipe
 
 import android.content.ContentValues.TAG
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.MediaController
+import android.widget.VideoView
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.tasty.recipesapp.R
@@ -65,18 +68,23 @@ class RecipeDetailFragment : Fragment() {
                 .fallback(R.drawable.ic_launcher_background)
                 .into(binding.recipeImageView)
         }
-
-        val ratingsLabel = requireActivity().getString(R.string.user_ratings_label)
-
-        binding.recipeRatingsView.text = ratingsLabel.plus(" ").plus(recipeModel.userRatings.score)
-
-//        binding.recipeTotalTimeView.text = recipeModel.totalTime.displayTier
-
         val instructionsString = recipeModel.instructions.joinToString("\n") {
             it.position.toString().plus(". ").plus(it.displayText)
         }
 
         binding.recipeInstructionsView.text = instructionsString
+
+
+        val videoView: VideoView = binding.recipeVideoUrlView
+        val uri = Uri.parse(recipeModel.videoUrl)
+        videoView.setVideoURI(uri)
+        val mediaController = MediaController(context)
+        mediaController.setAnchorView(videoView)
+        mediaController.setMediaPlayer(videoView)
+        videoView.setMediaController(mediaController)
+        videoView.start()
+
+
     }
 
 

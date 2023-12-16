@@ -12,5 +12,11 @@
     <string name="save">Save</string>
     <string name="new_recipe">New Recipe</string>
     <string name="enter_a_new_recipe">Enter a new recipe</string>
-    <string name="featured_recipes_of_the_day">Featured Recipes of the Day</string>
+    <string name="featured_recipes_of_the_day">Recipes of the Day</string>
+    <string name="recipe_name">Recipe Name</string>
+    <string name="description">Description</string>
+    <string name="videourl">VideoUrl</string>
+    <string name="instruction">Instruction</string>
+    <string name="add">Add</string>
+    <string name="imageurl">ImageUrl</string>
 </resources>

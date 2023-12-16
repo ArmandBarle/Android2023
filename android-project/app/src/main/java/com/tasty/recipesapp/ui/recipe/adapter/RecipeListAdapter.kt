@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.RecipeListItemBinding
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
+import java.text.DecimalFormat
+import kotlin.math.roundToInt
 
 class RecipeListAdapter(
     private var recipesList: List<RecipeModel>,
@@ -44,9 +46,12 @@ class RecipeListAdapter(
             .fallback(R.drawable.ic_launcher_background)
             .into(holder.recipeImageView)
 
-//        val ratingsLabel = "Rating:"
-//        holder.recipeRatingView.text = ratingsLabel
-//            .plus(" ").plus(currentRecipe.userRatings.score)
+        val decimalFormat = DecimalFormat("#.##")
+
+        Log.d("TAG", "onBindViewHolder: ${currentRecipe.userRatings.score}")
+        val ratingsLabel = "Rating:"
+        holder.recipeRatingView.text = ratingsLabel
+            .plus(" ").plus(decimalFormat.format(currentRecipe.userRatings.score))
     }
 
     fun setData(newList: List<RecipeModel>) {

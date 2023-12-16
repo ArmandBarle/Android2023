@@ -8,8 +8,8 @@ data class RecipeDTO(
     val description: String = "",
     val thumbnail_url: String = "",
     val user_ratings: UserRatingsDTO = UserRatingsDTO(),
-//    val total_time_tier: TotalTimeTierDTO = TotalTimeTierDTO(),
     val instructions: List<InstructionsDTO> = emptyList(),
+    val video_url: String? = "",
 )
 
 
@@ -19,8 +19,9 @@ fun RecipeDTO.toModel() = RecipeModel(
     description = this.description,
     thumbnailUrl = this.thumbnail_url,
     userRatings = this.user_ratings.toModel(),
-//    totalTime = this.total_time_tier.toModel(),
-    instructions = this.instructions.toModelList()
+    instructions = this.instructions.toModelList(),
+    videoUrl = this.video_url ?: ""
+
 )
 
 fun List<RecipeDTO>.toModelList(): List<RecipeModel> {

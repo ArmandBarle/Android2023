@@ -29,7 +29,6 @@ class RecipeListViewModel(var repository: RecipeRepository) : ViewModel() {
         viewModelScope.launch {
             val recipes = withContext(Dispatchers.IO) {
                 repository.getRecipesFromAPI("0", "40")
-//                repository.getFeedRecipesFromAPI("2", "+0700", "false", "0")
             }
             Log.d("xyz", "getAllRecipesFromApi: $recipes")
             recipesList.value = recipes
