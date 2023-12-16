@@ -44,6 +44,9 @@ class RecipeDetailFragment : Fragment() {
 
         recipeId?.let { viewModel.fetchRecipeData(it) }
 
+//        recipeId?.let { viewModel.fetchRecipeDataFromAPI(it) }
+
+
         viewModel.recipe.observe(viewLifecycleOwner) {
             Log.d(TAG, "second show details of recipe with id: $it")
             updateViews(it)
@@ -67,7 +70,7 @@ class RecipeDetailFragment : Fragment() {
 
         binding.recipeRatingsView.text = ratingsLabel.plus(" ").plus(recipeModel.userRatings.score)
 
-        binding.recipeTotalTimeView.text = recipeModel.totalTime.displayTier
+//        binding.recipeTotalTimeView.text = recipeModel.totalTime.displayTier
 
         val instructionsString = recipeModel.instructions.joinToString("\n") {
             it.position.toString().plus(". ").plus(it.displayText)
