@@ -24,4 +24,10 @@ class RecipeDetailViewModel(var repository: RecipeRepository) : ViewModel() {
         Log.d("xyz", "fetchRecipeData: $recipe")
         this.recipe.value = recipe
     }
+
+    fun fetchRecipeDataFromAPI(recipeId: Int) {
+        val recipe = repository.getRecipeFromAPI(recipeId.toString())
+        Log.d("xyz", "fetchRecipeDataFromAPI: $recipe")
+        this.recipe.value = recipe
+    }
 }

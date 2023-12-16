@@ -44,7 +44,6 @@ class RecipesFragment : Fragment() {
         binding = FragmentRecipesBinding.inflate(inflater, container, false)
         initRecyclerView()
 
-
         return binding.root
     }
 
@@ -57,11 +56,13 @@ class RecipesFragment : Fragment() {
         val factory = RecipeViewModelFactory((activity?.application as App).repository)
         viewModel = ViewModelProvider(this, factory)[RecipeListViewModel::class.java]
 
-        Log.d(TAG, "viewModel")
+        //Json
+//        context?.let {
+//            viewModel.fetchRecipesData(it)
+//        }
 
-        context?.let {
-            viewModel.fetchRecipesData(it)
-        }
+        //API
+        viewModel.getAllRecipesFromApi()
 
         viewModel.recipesList.observe(viewLifecycleOwner) { recipes ->
             recipesAdapter.setData(recipes)

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.room.Dao
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.tasty.recipesapp.api.RecipeApiClient
 import com.tasty.recipesapp.repository.recipe.dto.RecipeDTO
 import com.tasty.recipesapp.repository.recipe.model.RecipeModel
 import com.tasty.recipesapp.repository.recipe.dto.RecipesDTO
@@ -21,7 +22,40 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
     private val TAG: String? = RecipeRepository::class.java.canonicalName
     private var recipesList: List<RecipeModel> = emptyList()
     private var myRecipesList: ArrayList<RecipeModel> = ArrayList()
+    private val recipeApiClient = RecipeApiClient()
+    private val featuredList = ArrayList<RecipeModel>()
 
+    // API
+    suspend fun getRecipesFromAPI(
+        from: String,
+        size: String,
+        tags: String? = null,
+    ): List<RecipeModel> {
+        recipesList = recipeApiClient.recipeService
+            .getRecipes(from, size, tags).results.toModelList()
+        return recipesList
+    }
+
+    suspend fun getFeedRecipesFromAPI(
+        size: String,
+        timezone: String,
+        vegetarian: String? = "false",
+        from: String? = "0"
+    ): List<RecipeModel> {
+        val fs = recipeApiClient.recipeService
+            .getFeed(size, timezone, vegetarian, from).results.toModelList()
+
+        Log.d("xyz", "fs: $fs")
+        for (f in fs) {
+            if (f.type == "item") {
+                featuredList.add(f.item!!)
+            }
+        }
+
+        return featuredList
+    }
+
+    // JSON
     fun getRecipes(context: Context): List<RecipeModel> {
         lateinit var jsonString: String
         try {
@@ -40,9 +74,18 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
     }
 
     fun getRecipe(recipeId: Int): RecipeModel? = recipesList.find { it.id == recipeId }
-    fun getMyRecipe(recipeId: Int): RecipeModel? = myRecipesList.find { it.id == recipeId }
+
+    //API
+    fun getRecipeFromAPI(
+        id: String
+    ): RecipeModel {
+        val recipe = recipeApiClient.recipeService.getRecipe(id)
+        Log.d("xyz", "getRecipeFromAPI: $recipe")
+        return recipe.toModel()
+    }
 
     // List
+    fun getMyRecipe(recipeId: Int): RecipeModel? = myRecipesList.find { it.id == recipeId }
     fun insertRecipe(recipe: RecipeModel): Boolean {
         return myRecipesList.add(recipe)
     }
@@ -54,14 +97,14 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
     fun getMyRecipes() = myRecipesList
 
 
-    // Database
+// Database
 
-    suspend fun insertRecipe(recipe: RecipeEntity){
+    suspend fun insertRecipe(recipe: RecipeEntity) {
         val result = recipeDao.insertRecipe(recipe)
         Log.d("xyz", "insertRecipe: $result")
     }
 
-    suspend fun deleteRecipe(recipe: RecipeEntity){
+    suspend fun deleteRecipe(recipe: RecipeEntity) {
         val result = recipeDao.deleteRecipe(recipe)
         Log.d("xyz", "deleteRecipe: $result")
     }

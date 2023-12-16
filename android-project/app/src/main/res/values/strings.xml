@@ -12,4 +12,5 @@
     <string name="save">Save</string>
     <string name="new_recipe">New Recipe</string>
     <string name="enter_a_new_recipe">Enter a new recipe</string>
+    <string name="featured_recipes_of_the_day">Featured Recipes of the Day</string>
 </resources>
