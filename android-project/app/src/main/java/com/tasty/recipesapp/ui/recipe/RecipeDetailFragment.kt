@@ -42,9 +42,9 @@ class RecipeDetailFragment : Fragment() {
         val factory = RecipeDetailViewModelFactory((activity?.application as App).repository)
         viewModel = ViewModelProvider(this, factory)[RecipeDetailViewModel::class.java]
 
-//        recipeId?.let { viewModel.fetchRecipeData(it) }
+        recipeId?.let { viewModel.fetchRecipeData(it) }
 
-        recipeId?.let { viewModel.fetchRecipeDataFromAPI(it) }
+//        recipeId?.let { viewModel.fetchRecipeDataFromAPI(it) }
 
 
         viewModel.recipe.observe(viewLifecycleOwner) {

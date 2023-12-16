@@ -23,6 +23,7 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
     private var recipesList: List<RecipeModel> = emptyList()
     private var myRecipesList: ArrayList<RecipeModel> = ArrayList()
     private val recipeApiClient = RecipeApiClient()
+    private val featuredList = ArrayList<RecipeModel>()
 
     // API
     suspend fun getRecipesFromAPI(
@@ -30,8 +31,28 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
         size: String,
         tags: String? = null,
     ): List<RecipeModel> {
-        return recipeApiClient.recipeService
+        recipesList = recipeApiClient.recipeService
             .getRecipes(from, size, tags).results.toModelList()
+        return recipesList
+    }
+
+    suspend fun getFeedRecipesFromAPI(
+        size: String,
+        timezone: String,
+        vegetarian: String? = "false",
+        from: String? = "0"
+    ): List<RecipeModel> {
+        val fs = recipeApiClient.recipeService
+            .getFeed(size, timezone, vegetarian, from).results.toModelList()
+
+        Log.d("xyz", "fs: $fs")
+        for (f in fs) {
+            if (f.type == "item") {
+                featuredList.add(f.item!!)
+            }
+        }
+
+        return featuredList
     }
 
     // JSON
@@ -63,9 +84,7 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
         return recipe.toModel()
     }
 
-// List
-
-
+    // List
     fun getMyRecipe(recipeId: Int): RecipeModel? = myRecipesList.find { it.id == recipeId }
     fun insertRecipe(recipe: RecipeModel): Boolean {
         return myRecipesList.add(recipe)
