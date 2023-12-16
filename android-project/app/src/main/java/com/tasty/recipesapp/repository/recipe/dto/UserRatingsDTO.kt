@@ -10,7 +10,7 @@ data class UserRatingsDTO(
 
 fun UserRatingsDTO.toModel() = UserRatingsModel(
     countPositive = this.countPositive,
-    score = this.score,
+    score = this.score ?: 0.0,
     countNegative = this.countNegative
 )
 

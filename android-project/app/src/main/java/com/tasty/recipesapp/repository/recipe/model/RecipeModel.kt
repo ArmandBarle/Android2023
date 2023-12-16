@@ -6,6 +6,6 @@ data class RecipeModel(
     val description: String = "",
     val thumbnailUrl: String = "",
     val userRatings: UserRatingsModel = UserRatingsModel(),
-//    val totalTime: TotalTimeModel = TotalTimeModel(),
     val instructions: List<InstructionsModel> = emptyList(),
+    val videoUrl: String = "",
 )

@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ProfileViewModel(private val repository: RecipeRepository) : ViewModel() {
+class ProfileViewModel(val repository: RecipeRepository) : ViewModel() {
 
     var myRecipesList: MutableLiveData<List<RecipeModel>> = MutableLiveData()
 
