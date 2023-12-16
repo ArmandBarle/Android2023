@@ -18,8 +18,15 @@ interface RecipeService {
         @Query("tags") tags: String? = null
     ): RecipesDTO
 
-    suspend fun getRecipe(
+    @GET("recipes/get-more-info")
+    @Headers(
+        "X-RapidAPI-Key: e5b7ce1c39mshcf6f0c7da3c8752p1d0302jsnecc748a7c223",
+        "X-RapidAPI-Host: tasty.p.rapidapi.com"
+    )
+    fun getRecipe(
         @Query("id") id: String
     ): RecipeDTO
 }
+
+
 

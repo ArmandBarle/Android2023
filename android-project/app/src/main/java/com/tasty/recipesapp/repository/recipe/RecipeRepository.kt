@@ -55,11 +55,15 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
     fun getRecipe(recipeId: Int): RecipeModel? = recipesList.find { it.id == recipeId }
 
     //API
-    fun getRecipeFromAPI(recipeId: Int): RecipeModel? {
-        return getRecipe(recipeId)
+    fun getRecipeFromAPI(
+        id: String
+    ): RecipeModel {
+        val recipe = recipeApiClient.recipeService.getRecipe(id)
+        Log.d("xyz", "getRecipeFromAPI: $recipe")
+        return recipe.toModel()
     }
 
-    // List
+// List
 
 
     fun getMyRecipe(recipeId: Int): RecipeModel? = myRecipesList.find { it.id == recipeId }
@@ -74,7 +78,7 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
     fun getMyRecipes() = myRecipesList
 
 
-    // Database
+// Database
 
     suspend fun insertRecipe(recipe: RecipeEntity) {
         val result = recipeDao.insertRecipe(recipe)
