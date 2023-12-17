@@ -32,6 +32,7 @@ class NewRecipeFragment : Fragment() {
 
     private lateinit var binding: FragmentNewRecipeBinding
     private var editTextCount = 1
+    private var instructionsIds = mutableListOf<Int>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,13 +53,19 @@ class NewRecipeFragment : Fragment() {
         addButton.setOnClickListener { onAddEditTextClick() }
 
         binding.newRecipeSaveButton.setOnClickListener {
+            editTextCount = 0
             val recipeModel = RecipeModel(
                 viewModel.repository.getMyRecipes().size + 1,
                 binding.newRecipeNameView.text.toString(),
                 binding.newRecipeDescriptionView.text.toString(),
                 binding.newRecipeImageUrlView.text.toString(),
                 UserRatingsModel(0, 0.0, 0),
-                emptyList<InstructionsModel>(),
+                instructions = instructionsIds.map { id ->
+                    InstructionsModel(
+                        ++editTextCount,
+                        binding.root.findViewById<EditText>(id).text.toString()
+                    )
+                },
                 binding.newRecipeVideoUrlView.text.toString(),
             )
 
@@ -103,6 +110,7 @@ class NewRecipeFragment : Fragment() {
         newEditText.hint = "Intruction"
 
         newEditText.id = View.generateViewId()
+        instructionsIds.add(newEditText.id)
 
         // Add the new EditText to the container
         container.addView(newEditText)
