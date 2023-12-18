@@ -19,6 +19,7 @@
             android:src="@drawable/plus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@color/orange"/>
+            android:background="@color/orange"
+            app:backgroundTint="@color/orange" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
